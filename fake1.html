@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            display: none;
+        }
+        button{
+            margin-left: 50%;
+        }
+    </style>
+</head>
+<body>
+   
+    <h1>sign in here</h1>
+    <form>
+    <input type="text" placeholder="password"><br><br>
+    <input type="text" placeholder="confirmpassword"><br>
+   
+    <span>password doesn't match</span><br>
+    <input type="submit">
+</form>
+    
+    <script>
+        console.log(document.forms)
+        var d=document.forms;
+        console.log(d[0]);
+    var arr=[];
+        d[0].addEventListener("submit",function(e){
+             e.preventDefault()
+
+            var obj={
+                password:e.target[0].value,
+               confirmpassword:e.target[1].value
+            }
+            arr.push(obj);
+            console.log(arr);
+
+            localStorage.setItem("users",JSON.stringify(arr))
+            e.target[0].value="";
+            e.target[1].value="";
+
+        if(obj.password!==obj.confirmpassword){
+           var span=document.getElementsByTagName("span")
+          span[0].style.display="inline"
+          span[0].style.color="red"
+        }
+        else if(obj.password==obj.confirmpassword){
+            var btn=document.createElement("button")
+            document.body.appendChild(btn)
+            btn.innerText="successfully Registerd"
+            
+        }
+
+    })
+    </script>
+</body>
+</html>
